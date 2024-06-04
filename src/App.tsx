@@ -1,11 +1,11 @@
 import NavigationBar from "./components/NavigationBar";
-
 import AddTodoForm from "./components/AddTodoForm";
 import useTodos from "./hooks/useTodos";
 import TodoList from "./components/TodoList";
 
 function App() {
-  const { todos, addTodo, completeTodo, deleteTodo } = useTodos();
+  const { todos, addTodo, completeTodo, deleteTodo, toggleAllTodos } =
+    useTodos();
 
   return (
     <>
@@ -19,6 +19,7 @@ function App() {
             todos={todos}
             onCompletedChange={completeTodo}
             onDelete={deleteTodo}
+            toggleAllTodos={toggleAllTodos}
           />
         </div>
       </main>

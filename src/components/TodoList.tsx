@@ -5,12 +5,14 @@ interface TodoListProps {
   todos: Todo[];
   onCompletedChange: (id: number, complete: boolean) => void;
   onDelete: (id: number) => void;
+  toggleAllTodos: () => void;
 }
 
 export default function TodoList({
   todos,
   onCompletedChange,
   onDelete,
+  toggleAllTodos,
 }: TodoListProps) {
   const todosSorted = todos.sort((a, b) => {
     if (a.completed === b.completed) {
@@ -29,6 +31,15 @@ export default function TodoList({
           onDelete={onDelete}
         />
       ))}
+
+      <div className="flex justify-end">
+        <button
+          onClick={toggleAllTodos}
+          className="px-4 py-2 bg-[#726759] text-white rounded"
+        >
+          {todos.every((todo) => todo.completed) ? "Uncheck All" : "Check All"}
+        </button>
+      </div>
     </div>
   );
 }

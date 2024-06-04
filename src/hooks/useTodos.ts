@@ -26,6 +26,13 @@ export default function useTodos() {
     setTodos((prevTodos) => prevTodos.filter((todo) => todo.id !== id));
   }
 
+  function toggleAllTodos() {
+    const allCompleted = todos.every((todo) => todo.completed);
+    setTodos((prevTodos) =>
+      prevTodos.map((todo) => ({ ...todo, completed: !allCompleted }))
+    );
+  }
+
   function addTodo(title: string) {
     setTodos((prevTodos) => [
       {
@@ -41,5 +48,6 @@ export default function useTodos() {
     completeTodo,
     todos,
     deleteTodo,
+    toggleAllTodos,
   };
 }
