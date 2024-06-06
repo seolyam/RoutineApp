@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { Todo } from "../types/Todo";
 import TodoItem from "./TodoItem";
 
@@ -6,6 +7,7 @@ interface TodoListProps {
   onCompletedChange: (id: number, complete: boolean) => void;
   onDelete: (id: number) => void;
   toggleAllTodos: () => void;
+  onEdit: (id: number, newTitle: string) => void;
 }
 
 export default function TodoList({
@@ -13,7 +15,22 @@ export default function TodoList({
   onCompletedChange,
   onDelete,
   toggleAllTodos,
+  onEdit,
 }: TodoListProps) {
+  useEffect(() => {
+    const uncheckAllTodosAtMidnight = () => {
+      const currentTime = new Date();
+      const currentHourInPH = currentTime.getUTCHours() + 8;
+
+      if (currentHourInPH === 0) {
+        toggleAllTodos();
+      }
+    };
+    const intervalId = setInterval(uncheckAllTodosAtMidnight, 60000);
+
+    return () => clearInterval(intervalId);
+  }, [toggleAllTodos]);
+
   const todosSorted = todos.sort((a, b) => {
     if (a.completed === b.completed) {
       return b.id - a.id;
@@ -29,6 +46,7 @@ export default function TodoList({
           todo={todo}
           onCompletedChange={onCompletedChange}
           onDelete={onDelete}
+          onEdit={onEdit}
         />
       ))}
 

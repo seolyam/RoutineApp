@@ -22,6 +22,14 @@ export default function useTodos() {
     );
   }
 
+  function editTodo(id: number, newTitle: string) {
+    setTodos((prevTodos) =>
+      prevTodos.map((todo) =>
+        todo.id === id ? { ...todo, title: newTitle } : todo
+      )
+    );
+  }
+
   function deleteTodo(id: number) {
     setTodos((prevTodos) => prevTodos.filter((todo) => todo.id !== id));
   }
@@ -49,5 +57,6 @@ export default function useTodos() {
     todos,
     deleteTodo,
     toggleAllTodos,
+    editTodo,
   };
 }
