@@ -2,10 +2,19 @@ import NavigationBar from "./components/NavigationBar";
 import AddTodoForm from "./components/AddTodoForm";
 import useTodos from "./hooks/useTodos";
 import TodoList from "./components/TodoList";
+import Popup from "./components/Popup";
 
 function App() {
-  const { todos, addTodo, completeTodo, deleteTodo, toggleAllTodos, editTodo } =
-    useTodos();
+  const {
+    todos,
+    addTodo,
+    completeTodo,
+    deleteTodo,
+    toggleAllTodos,
+    editTodo,
+    setShowPopup,
+    showPopup,
+  } = useTodos();
 
   return (
     <>
@@ -24,6 +33,12 @@ function App() {
           />
         </div>
       </main>
+      {showPopup && (
+        <Popup
+          message="This Routine App is still in progress and the tasks added can only be saved by the local machine."
+          onClose={() => setShowPopup(false)}
+        />
+      )}
     </>
   );
 }

@@ -10,6 +10,8 @@ export default function useTodos() {
     return savedTodos.length > 0 ? savedTodos : dummyData;
   });
 
+  const [showPopup, setShowPopup] = useState(false);
+
   useEffect(() => {
     localStorage.setItem("todos", JSON.stringify(todos));
   }, [todos]);
@@ -42,6 +44,10 @@ export default function useTodos() {
   }
 
   function addTodo(title: string) {
+    if (!localStorage.getItem("hasAddedTaskBefore")) {
+      setShowPopup(true);
+      localStorage.setItem("hasAddedTaskBefore", "true");
+    }
     setTodos((prevTodos) => [
       {
         id: Date.now(),
@@ -58,5 +64,7 @@ export default function useTodos() {
     deleteTodo,
     toggleAllTodos,
     editTodo,
+    showPopup,
+    setShowPopup,
   };
 }
