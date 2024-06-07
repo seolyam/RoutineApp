@@ -55,7 +55,9 @@ export default function TodoList({
           onClick={toggleAllTodos}
           className="px-4 py-2 bg-[#726759] text-white rounded"
         >
-          {todos.every((todo) => todo.completed) ? "Uncheck All" : "Check All"}
+          {todos.every((todo) => todo.completed)
+            ? "Uncomplete All"
+            : "Complete All"}
         </button>
       </div>
     </div>

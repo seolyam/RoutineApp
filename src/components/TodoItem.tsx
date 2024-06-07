@@ -26,7 +26,7 @@ export default function TodoItem({
   };
 
   return (
-    <div className="flex">
+    <div className="flex gap-1">
       <label className=" flex border rounded-md p-2 border-black bg-[#FAF8F1] hover:bg- grow justify-between">
         <div className="flex gap-2">
           <input
@@ -56,7 +56,7 @@ export default function TodoItem({
         </button>
       </label>
       <button onClick={() => onDelete(todo.id)}>
-        <Trash2 className="text-[#FAF8f1]"></Trash2>
+        <Trash2 className="text-[#FAF8f1] mb-1"></Trash2>
       </button>
     </div>
   );
