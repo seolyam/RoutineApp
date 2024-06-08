@@ -32,6 +32,10 @@ export default function useTodos() {
     );
   }
 
+  function deleteAllTodos() {
+    setTodos((prevTodos) => prevTodos.filter((todo) => !todo.completed));
+  }
+
   function deleteTodo(id: number) {
     setTodos((prevTodos) => prevTodos.filter((todo) => todo.id !== id));
   }
@@ -66,5 +70,6 @@ export default function useTodos() {
     editTodo,
     showPopup,
     setShowPopup,
+    deleteAllTodos,
   };
 }

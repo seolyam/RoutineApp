@@ -8,6 +8,7 @@ interface TodoItemProps {
   onCompletedChange: (id: number, complete: boolean) => void;
   onDelete: (id: number) => void;
   onEdit: (id: number, newTitle: string) => void;
+  onDeleteAll: (id: number) => void;
 }
 export default function TodoItem({
   todo,

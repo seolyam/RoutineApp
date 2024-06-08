@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { Todo } from "../types/Todo";
 import TodoItem from "./TodoItem";
+import { DeleteIcon } from "lucide-react";
 
 interface TodoListProps {
   todos: Todo[];
@@ -8,6 +9,7 @@ interface TodoListProps {
   onDelete: (id: number) => void;
   toggleAllTodos: () => void;
   onEdit: (id: number, newTitle: string) => void;
+  onDeleteAll: () => void;
 }
 
 export default function TodoList({
@@ -16,6 +18,7 @@ export default function TodoList({
   onDelete,
   toggleAllTodos,
   onEdit,
+  onDeleteAll,
 }: TodoListProps) {
   useEffect(() => {
     const uncheckAllTodosAtMidnight = () => {
@@ -38,6 +41,8 @@ export default function TodoList({
     return a.completed ? 1 : -1;
   });
 
+  const completedTodos = todos.filter((todo) => todo.completed);
+
   return (
     <div className="space-y-2">
       {todosSorted.map((todo) => (
@@ -47,18 +52,27 @@ export default function TodoList({
           onCompletedChange={onCompletedChange}
           onDelete={onDelete}
           onEdit={onEdit}
+          onDeleteAll={onDeleteAll}
         />
       ))}
 
       <div className="flex justify-end">
-        <button
-          onClick={toggleAllTodos}
-          className="px-4 py-2 bg-[#726759] text-white rounded"
-        >
-          {todos.every((todo) => todo.completed)
-            ? "Uncomplete All"
-            : "Complete All"}
-        </button>
+        {completedTodos.length > 1 && (
+          <button
+            onClick={onDeleteAll}
+            className="bg-[#d55c4f] rounded-s-md w-16 pl-4 text-white "
+          >
+            <DeleteIcon />
+          </button>
+        )}
+        {todos.length > 1 && (
+          <button
+            onClick={toggleAllTodos}
+            className="px-4 py-2 bg-[#726759] text-white rounded"
+          >
+            {todos.every((todo) => todo.completed) ? "Reset" : "Complete"}
+          </button>
+        )}
       </div>
     </div>
   );
