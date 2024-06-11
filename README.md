@@ -1,1 +1,2 @@
-this is my first ever project, made it for gf
+this is my first ever project with ts
+
