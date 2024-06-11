@@ -2,6 +2,7 @@ import { Todo } from "../types/Todo";
 import { Trash2 } from "lucide-react";
 import { Pencil } from "lucide-react";
 import { useState } from "react";
+import Modal from "./Modal";
 
 interface TodoItemProps {
   todo: Todo;
@@ -24,6 +25,21 @@ export default function TodoItem({
       onEdit(todo.id, newTitle);
     }
     setIsEditing(!isEditing);
+  };
+
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
+
+  const handleDeleteClick = () => {
+    setShowDeleteModal(true);
+  };
+
+  const handleConfirmDelete = () => {
+    setShowDeleteModal(false);
+    onDelete(todo.id);
+  };
+
+  const handleCancelDelete = () => {
+    setShowDeleteModal(false);
   };
 
   return (
@@ -56,9 +72,18 @@ export default function TodoItem({
           <Pencil className="scale-75 text-[#FAF8F1] hover:text-[#726759] " />
         </button>
       </label>
-      <button onClick={() => onDelete(todo.id)}>
+      <button onClick={handleDeleteClick}>
         <Trash2 className="text-[#FAF8f1] mb-1"></Trash2>
       </button>
+      <Modal
+        isOpen={showDeleteModal}
+        title="Confirm Delete"
+        message="Are you sure you want to delete this task? This action cannot be undone."
+        confirmText="Yes, delete"
+        cancelText="Cancel"
+        onConfirm={handleConfirmDelete}
+        onCancel={handleCancelDelete}
+      />
     </div>
   );
 }
