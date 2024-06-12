@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { Todo } from "../types/Todo";
 import TodoItem from "./TodoItem";
 import { DeleteIcon } from "lucide-react";
@@ -47,12 +47,14 @@ export default function TodoList({
     return () => clearInterval(intervalId);
   }, [toggleAllTodos]);
 
-  const todosSorted = todos.sort((a, b) => {
-    if (a.completed === b.completed) {
-      return b.id - a.id;
-    }
-    return a.completed ? 1 : -1;
-  });
+  const todosSorted = useMemo(() => {
+    return todos.slice().sort((a, b) => {
+      if (a.completed === b.completed) {
+        return b.id - a.id;
+      }
+      return a.completed ? 1 : -1;
+    });
+  }, [todos]);
 
   const completedTodos = todos.filter((todo) => todo.completed);
 
