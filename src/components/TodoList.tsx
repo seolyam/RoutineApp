@@ -3,6 +3,7 @@ import { Todo } from "../types/Todo";
 import TodoItem from "./TodoItem";
 import { DeleteIcon } from "lucide-react";
 import Modal from "./Modal";
+import moment from "moment-timezone";
 
 interface TodoListProps {
   todos: Todo[];
@@ -32,13 +33,15 @@ export default function TodoList({
 
   useEffect(() => {
     const uncheckAllTodosAtMidnight = () => {
-      const currentTime = new Date();
-      const currentHourInPH = currentTime.getUTCHours() + 8;
+      const currentTime = moment.tz("Asia/Manila");
+      const currentHour = currentTime.hour();
+      const currentMinute = currentTime.minute();
 
-      if (currentHourInPH === 0) {
+      if (currentHour === 0 && currentMinute === 0) {
         toggleAllTodos();
       }
     };
+
     const intervalId = setInterval(uncheckAllTodosAtMidnight, 60000);
 
     return () => clearInterval(intervalId);
