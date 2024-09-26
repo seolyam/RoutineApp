@@ -19,4 +19,10 @@ Technologies Used
     TheMealDB API: Provides data on meals, categories, areas, and ingredients.
     Spoonacular API: Adds additional meal data and recipe variety.
 
+Contact
+
+For any inquiries or feedback, please contact:
+
+    leeyam.dev@gmail.com
+
 https://phago.vercel.app/
