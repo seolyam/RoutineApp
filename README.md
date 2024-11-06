@@ -1,7 +1,3 @@
-Phago - Meal Discovery App
-
-Phago is a web application that allows users to search and discover various meals from around the world. The app integrates with multiple meal-related APIs, such as TheMealDB and Spoonacular, to provide a rich collection of recipes, ingredients, and meal details. Users can also mark meals as favorites and view their recently searched meals.
-Features
 
     Search by Name, Category, Ingredient, or Area: Easily find meals by searching for specific ingredients, categories (e.g., dessert, beef), or regions (e.g., Mexican, Japanese).
     Meal Details: View comprehensive details of each meal, including ingredients, cooking instructions, and a demo video.
